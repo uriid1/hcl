@@ -44,7 +44,7 @@ local settings = {
 local USAGE_TEXT = [[
 Options:
   -h HOST          Specify host (default: 0.0.0.0)
-  -p PORT          Specify port (default: 443)
+  -p PORT          Specify port (default: 80)
   -m METHOD        HTTP method (default: GET)
   -P PATH          Request path (default: /)
   -d BODY          Request body
