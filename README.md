@@ -8,7 +8,7 @@ chmod +x deps.sh
 ```
 # Usage
 ```
-Usage: ./hcl [options]
+Usage: ./hcl.lua [options]
 Options:
   -h HOST          Specify host (default: 0.0.0.0)
   -p PORT          Specify port (default: 443)
