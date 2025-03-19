@@ -395,7 +395,6 @@ local function makeRequest(settings)
 
   -- Connect to server
   local success, err = client:connect(settings.host, settings.port)
-
   if not success then
     log("Error connecting to " .. settings.host .. ":" .. settings.port .. ": " .. err)
 
@@ -490,7 +489,7 @@ local function makeRequest(settings)
       log("\nFollowing redirect to: " .. location .. "\n")
 
       -- Parse the redirect URL
-      local redirect_url = url.parse(location)
+      local redirectUrl = url.parse(location)
       local newSettings = {}
 
       -- Copy current settings
@@ -499,14 +498,14 @@ local function makeRequest(settings)
       end
 
       -- Update settings for the redirect
-      if redirect_url.host then
+      if redirectUrl.host then
         -- Absolute URL
-        newSettings.host = redirect_url.host
-        newSettings.path = redirect_url.path or "/"
+        newSettings.host = redirectUrl.host
+        newSettings.path = redirectUrl.path or "/"
 
-        if redirect_url.port then
-          newSettings.port = tonumber(redirect_url.port)
-        elseif redirect_url.scheme == "https" then
+        if redirectUrl.port then
+          newSettings.port = tonumber(redirectUrl.port)
+        elseif redirectUrl.scheme == "https" then
           newSettings.port = 443
         else
           newSettings.port = 80

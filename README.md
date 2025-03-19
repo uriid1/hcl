@@ -3,9 +3,9 @@ Http client in luaJIT
 
 # Installation
 ```bash
-chmod +x deps.sh
-./deps.sh
+bash deps.sh
 ```
+
 # Usage
 ```
 Usage: ./hcl.lua [options]
