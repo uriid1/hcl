@@ -20,6 +20,9 @@ local arg = arg or {...}
 
 local version = 0.1
 
+local EXIT_SUCCESS = 0
+local EXIT_FAILURE = 1
+
 -- Default settings
 local settings = {
   host = "0.0.0.0",
@@ -68,7 +71,7 @@ local function printUsage()
   io.write("Usage: " .. arg[0] .. " [options]\n")
   io.write(USAGE_TEXT)
 
-  os.exit(1)
+  os.exit(EXIT_SUCCESS)
 end
 
 local function log(text)
@@ -138,7 +141,7 @@ while i <= #arg do
     printUsage()
   elseif opt == '-version' then
     io.write("Version: " .. version, "\n")
-    os.exit(1)
+    os.exit(EXIT_SUCCESS)
   else
     log("Unknown option: " .. opt)
 
@@ -152,7 +155,7 @@ local function readFile(filepath)
   if not file then
     log("Error: Could not open file " .. filepath)
 
-    os.exit(1)
+    os.exit(EXIT_FAILURE)
   end
 
   local content = file:read("*all")
@@ -168,7 +171,7 @@ local function writeFile(filepath, content)
   if not file then
     log("Error: Could not open file " .. filepath .. " for writing")
 
-    os.exit(1)
+    os.exit(EXIT_FAILURE)
   end
 
   file:write(content)
@@ -398,7 +401,7 @@ local function makeRequest(settings)
   if not success then
     log("Error connecting to " .. settings.host .. ":" .. settings.port .. ": " .. err)
 
-    os.exit(1)
+    os.exit(EXIT_FAILURE)
   end
 
   -- Wrap socket in SSL if using port 443
@@ -415,7 +418,7 @@ local function makeRequest(settings)
     if not success then
       log("SSL handshake failed: " .. err)
 
-      os.exit(1)
+      os.exit(EXIT_FAILURE)
     end
   end
 
@@ -424,7 +427,7 @@ local function makeRequest(settings)
   if not bytes then
     log("Error sending request: " .. err)
 
-    os.exit(1)
+    os.exit(EXIT_FAILURE)
   end
 
   -- Receive response
@@ -550,5 +553,5 @@ if settings.output then
 
   log("Response saved: " .. settings.output)
 
-  os.exit(1)
+  os.exit(EXIT_SUCCESS)
 end
