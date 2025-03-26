@@ -26,7 +26,7 @@ local EXIT_FAILURE = 1
 -- Default settings
 local settings = {
   host = "0.0.0.0",
-  port = 80,
+  port = 8080,
   method = "GET",
   path = "/",
   body = "",
@@ -47,7 +47,7 @@ local settings = {
 local USAGE_TEXT = [[
 Options:
   -h HOST          Specify host (default: 0.0.0.0)
-  -p PORT          Specify port (default: 80)
+  -p PORT          Specify port (default: 8080)
   -m METHOD        HTTP method (default: GET)
   -P PATH          Request path (default: /)
   -d BODY          Request body
@@ -389,6 +389,8 @@ local function makeRequest(settings)
     log("<<<< REQUEST <<<<")
     log(request)
     log("<<<<<<<<<<<<<<<<<<")
+  else
+    log(request)
   end
 
   -- Create socket
